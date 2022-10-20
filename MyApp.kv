@@ -1,0 +1,190 @@
+# there are three screens
+windowManager:
+	loginWindow:
+	signupWindow:
+	logDataWindow:
+
+# GUI for the login window
+<loginWindow>:
+	email : email
+	pwd : pwd
+	FloatLayout:
+		size: root.width, root.height
+        Label:
+			text : "LOGIN PAGE"
+			size_hint : 0.2, 0.2
+			pos_hint : {"x":0.4, "top":1}
+            color: 0, 0, 0, 1
+		Label:
+			text : "EMAIL: "
+			size_hint : 0.2, 0.1
+			pos_hint : {"x":0.25, "top":0.75}
+            color: 0, 0, 0, 0.5
+		TextInput:
+			id : email
+			multiline :False
+			size_hint : 0.35, 0.07
+			pos_hint : {"x" : 0.45, "top" : 0.75}
+		Label:
+			text : "PASSWORD: "
+			size_hint : 0.2, 0.1
+			pos_hint : {"x" : 0.20, "top" : 0.65}
+            color: 0, 0, 0, 0.5
+		TextInput:
+			id : pwd
+			multiline :False
+			size_hint : 0.35, 0.07
+			pos_hint : {"x" : 0.45, "top" : 0.65}
+		Button:
+			text : "Create an account"
+			size_hint : 0.45, 0.07
+			pos_hint : {"x" : 0.3, "top" : 0.4}
+			on_release:
+				app.root.current = 'signup'
+				root.manager.transition.direction = "left"
+		Button:
+			text : "LOGIN"
+			size_hint : 0.45, 0.07
+			pos_hint : {"x" : 0.3, "top" : 0.3}
+			on_release:
+				root.validate()
+				root.manager.transition.direction = "up"
+
+# GUI for the signup window
+<signupWindow>:
+	fullname : fullname
+    address : address
+	email : email
+	password : password
+    phone_num : phone_num
+    role : role
+	FloatLayout:
+        Label:
+			text : "SIGNUP PAGE"
+			size_hint : 0.2, 0.2
+			pos_hint : {"x":0.4, "top":1}
+            color: 0, 0, 0, 1
+		Label:
+			text : " FULL NAME: "
+			size_hint : 0.2, 0.1
+			pos_hint : {"x":0.15, "top":0.85}
+            color: 0, 0, 0, 0.5
+		TextInput:
+			id : fullname
+			multiline : False
+			size_hint : 0.5, 0.06
+			pos_hint : {"x" : 0.4, "top" : 0.83}
+            color: 0, 0, 0, 0.5
+		Label:
+			text : "EMAIL: "
+			size_hint : 0.2, 0.1
+			pos_hint : {"x" : 0.15, "top" : 0.78}
+            color: 0, 0, 0, 0.5
+		TextInput:
+			id : email
+			multiline : False
+			size_hint : 0.5, 0.06
+			pos_hint : {"x" : 0.4, "top" : 0.76}
+            color: 0, 0, 0, 0.5
+        Label:
+			text : "ADDRESS: "
+			size_hint : 0.2, 0.1
+			pos_hint : {"x":0.15, "top":0.71}
+            color: 0, 0, 0, 0.5
+		TextInput:
+			id : address
+			multiline : False
+			size_hint : 0.5, 0.06
+			pos_hint : {"x" : 0.4, "top" : 0.69}
+            color: 0, 0, 0, 0.5
+        Label:
+			text : "PHONE NO. : "
+			size_hint : 0.2, 0.1
+			pos_hint : {"x":0.15, "top":0.64}
+            color: 0, 0, 0, 0.5
+		TextInput:
+			id : phone_num
+			multiline : False
+			size_hint : 0.5, 0.06
+			pos_hint : {"x" : 0.4, "top" : 0.62}
+            color: 0, 0, 0, 0.5
+		Label:
+			text : "PASSWORD: "
+			size_hint : 0.2, 0.1
+			pos_hint : {"x" : 0.15, "top" : 0.57}
+            color: 0, 0, 0, 0.5
+		TextInput:
+			id : password
+			multiline : False
+			size_hint : 0.5, 0.06
+			pos_hint : {"x" : 0.4, "top" : 0.55}
+            color: 0, 0, 0, 0.5
+        Label:
+            text: 'Role'
+            size_hint : 0.2, 0.1
+			pos_hint : {"x" : 0.15, "top" : 0.50}
+            color: 0, 0, 0, 0.5
+        Button:
+            id: btn
+            text: 'Select Role'
+            size_hint : 0.5, 0.05
+            pos_hint : {"x" : 0.4, "top" : 0.48}
+            on_parent: role.dismiss()
+            on_release: role.open(self)
+        DropDown:
+            id : role
+            on_select: btn.text = f'{args[1]}'
+        Button:
+            text: 'Customer'
+            size_hint : 0.5, 0.05
+			pos_hint : {"x" : 0.4, "top" : 0.44}
+            on_release: role.select('Customer')
+        Button:
+            text: 'Seller'
+            size_hint : 0.5, 0.05
+			pos_hint : {"x" : 0.4, "top" : 0.40}
+            on_release: role.select('Seller')
+        Button:
+            text: 'Delivery Person'
+            size_hint : 0.5, 0.05
+			pos_hint : {"x" : 0.4, "top" : 0.36}
+            on_release: role.select('Delivery Person')
+        Button:
+			text : "SIGN UP"
+			size_hint : 0.3, 0.1
+			pos_hint : {"x" : 0.39, "top" : 0.28}
+			on_press :
+				root.signupbtn()
+				root.manager.transition.direction = "right"
+
+# GUI to show validation result
+<logDataWindow>:
+	info : info
+	FloatLayout:
+		Label:
+			id : info
+			size_hint : 0.8, 0.2
+			pos_hint : {"x" : 0.15, "top" : 0.8}
+			text : "SUCCESSFULLY LOGGED IN"
+		Button:
+			text : "Login"
+			size_hint : 0.4, 0.1
+			pos_hint : {"x" : 0.33, "top" : 0.55}
+			on_release:
+				app.root.current = 'login'
+				root.manager.transition.direction = "down"
+		Button:
+			text : "Create new account"
+			size_hint : 0.4, 0.1
+			pos_hint : {"x" : 0.33, "top" : 0.4}
+			on_release:
+				app.root.current = 'signup'
+				root.manager.transition.direction = "down"
+
+
+# GUI for pop up window
+<P>:
+	Label:
+		text : "Please enter valid information"
+		size_hint : 0.2, 0.1
+		pos_hint : {"x" : 0.3, "top" : 0.8}
